@@ -1,0 +1,146 @@
+<% layout('./layouts/boilerplate') %>
+<style>
+  .filter {
+    margin-top: 1rem;
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter:hover {
+    opacity: 1;
+  }
+
+  .tax-toggle{
+    border: 0.5px black solid;
+    border-radius: 10px;
+    height: 3rem;
+    padding: 1rem;
+    margin-left: 7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .tax-info {
+  }
+</style>
+<!-- <h3>All Listings</h3> -->
+<div class="filters">
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-bed"></i>
+      <p>Rooms</p>
+    </div>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-city"></i>
+      <p>Icoic Cities</p>
+    </div>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-mountain-sun"></i>
+      <p>Mountain</p>
+    </div>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-person-swimming"></i>
+      <p>Amazing Pools</p>
+    </div>
+  </div>
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-umbrella-beach"></i>
+      <p>Beach</p>
+    </div>
+  </div>
+
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-tents"></i>
+      <p>Camping</p>
+    </div>
+  </div>
+
+  <div class="filter">
+    <div>
+      <i class="fa-solid fa-cow"></i>
+      <p>Farms</p>
+    </div>
+  </div>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="switchCheckDefault"
+        checked
+      />
+      <label class="form-check-label" for="switchCheckDefault">
+        Display total after taxes
+      </label>
+    </div>
+  </div>
+</div>
+<div class="row row-cols-lg-3 row-cols-ld-2 row-cols-sm-1 mt-3">
+  <% for(let listing of allListings){ %>
+  <a href="/listings/<%= listing.id %>" class="listing-link">
+    <div class="card col">
+      <div class="card-img-overlay"></div>
+      <img
+        src="<%= listing.image.url %>"
+        class="card-img-top"
+        alt="<%= listing.filename %>"
+      />
+      <div class="card-body">
+        <p class="card-text">
+          <%= listing.title %> <br />
+          &#8377;<%= listing.price.toLocaleString('en-IN') %>
+          <span id="per-night">/ night</span>
+          <i class="tax-info"> &nbsp; +18% GST</i>
+        </p>
+      </div>
+    </div>
+  </a>
+  <% } %>
+</div>
+
+<script>
+  const taxSwitch = document.getElementById("switchCheckDefault");
+
+  function toggleGSTDisplay(show) {
+    const taxInfoElements = document.getElementsByClassName("tax-info");
+    for (let element of taxInfoElements) {
+      element.style.display = show ? "inline" : "none";
+    }
+  }
+
+  // On switch change
+  taxSwitch.addEventListener("change", () => {
+    toggleGSTDisplay(taxSwitch.checked);
+  });
+
+  // On initial load
+  window.addEventListener("DOMContentLoaded", () => {
+    toggleGSTDisplay(taxSwitch.checked);
+  });
+</script>
