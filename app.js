@@ -75,10 +75,6 @@ const sessionOption = {
 };
 
 
-app.get("/", (req, res) => {
-  res.send("ROOT is here!");
-});
-
 app.use(session(sessionOption));
 app.use(flash());
 
