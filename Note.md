@@ -167,3 +167,15 @@ passport.use(new LocalStrategy(User.authenticate()))
 
 Implement Design Pattern for Listings 
 Storing core backend logic in controllers is a common and effective way to organize and compact your code, especially in MVC (Model-View-Controller) or similar architectural patterns.
+
+
+** GitHub
+git init
+git status
+
+touch .gitignore
+store the file and folders name which you don't want to push
+
+git add .
+git commit -m "Add Project Files"
+
